@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Blog</string>
+    <string name="title_activity_write_an_article">WriteAnArticle</string>
 </resources>

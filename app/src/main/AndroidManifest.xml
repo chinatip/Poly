@@ -18,7 +18,11 @@
         <activity android:name=".activities.pages.Timeline" />
         <activity android:name=".activities.pages.Following" />
         <activity android:name=".activities.pages.Reminder" />
-        <activity android:name=".activities.pages.History"></activity>
+        <activity android:name=".activities.pages.History" />
+        <activity
+            android:name=".activities.pages.WriteAnArticle"
+            android:label=""
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

@@ -23,7 +23,9 @@
             android:name=".activities.pages.WriteAnArticle"
             android:label=""
             android:theme="@style/AppTheme" />
-        <activity android:name=".activities.ArticleActivity"></activity>
+        <activity android:name=".activities.ArticleActivity" />
+        <activity android:name=".activities.WelcomeActivity" />
+        <activity android:name=".activities.AddUserActivity"></activity>
     </application>
 
 </manifest>

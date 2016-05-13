@@ -18,9 +18,7 @@ import java.util.ArrayList;
  * Created by Chinatip Vichian
  */
 public class ArticleAdapter extends ArrayAdapter<Article> {
-    int state =0;
-    //0 - not pin
-    //1 - pin
+
     public ArticleAdapter(Context context, int resource, ArrayList<Article> objects){
         super(context, resource, objects);
     }
@@ -35,13 +33,11 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         }
         TextView word = (TextView) v.findViewById(R.id.header);
         word.setText(getItem(position).getHeader());
-        if(state==1)
+        if(1+1==9)
             word.setTextColor(Color.RED);
         else
             word.setTextColor(Color.GRAY);
         return v;
     }
-    public void setState(int state) {
-        this.state = state;
-    }
+
 }

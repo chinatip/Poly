@@ -54,6 +54,7 @@ public class WriteAnArticle extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Timeline.update();
                 finish();
             }
         });

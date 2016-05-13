@@ -25,7 +25,7 @@
         android:layout_marginTop="22dp"
         android:layout_row="0"
         android:layout_column="1"
-        android:textSize="22dp"
+        android:textSize="18dp"
         android:layout_below="@+id/form1"
         android:layout_alignLeft="@+id/form1"
         android:layout_alignStart="@+id/form1"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:text="Username"
         android:id="@+id/form1"
-        android:textSize="22dp"
+        android:textSize="18dp"
         android:layout_marginTop="31dp"
         android:layout_below="@+id/toolbar"
         android:layout_alignParentLeft="true"
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:text="Lastname"
         android:id="@+id/form4"
-        android:textSize="22dp"
+        android:textSize="18dp"
         android:layout_marginTop="22dp"
         android:layout_below="@+id/form3"
         android:layout_alignRight="@+id/form1"
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:text="Firstname"
         android:id="@+id/form3"
-        android:textSize="22dp"
+        android:textSize="18dp"
         android:layout_marginTop="22dp"
         android:layout_row="4"
         android:layout_column="0"
@@ -79,32 +79,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/username"
-        android:text="username"
         android:layout_marginLeft="42dp"
         android:layout_marginStart="42dp"
         android:layout_above="@+id/form2"
         android:layout_toRightOf="@+id/form1"
-        android:ems="10" />
+        android:ems="10"
+        android:layout_marginRight="20dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/firstname"
-        android:text="firstname"
         android:layout_above="@+id/form4"
         android:layout_alignLeft="@+id/username"
         android:layout_alignStart="@+id/username"
-        android:ems="10"/>
+        android:ems="10"
+        android:layout_marginRight="20dp"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lastname"
-        android:text="lastname"
         android:ems="10"
         android:layout_alignLeft="@+id/firstname"
         android:layout_alignStart="@+id/firstname"
-        android:layout_alignBottom="@+id/form4" />
+        android:layout_alignBottom="@+id/form4"
+        android:layout_marginRight="20dp"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -112,34 +112,34 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/password"
-        android:text="password"
         android:layout_above="@+id/form3"
         android:layout_alignLeft="@+id/firstname"
-        android:layout_alignStart="@+id/firstname" />
+        android:layout_alignStart="@+id/firstname"
+        android:layout_marginRight="20dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"
         android:id="@+id/registerButton"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="67dp"
         android:textColor="#ffffff"
         android:background="#FF0081"
         android:layout_below="@+id/lastname"
-        android:layout_alignLeft="@+id/lastname"
-        android:layout_alignStart="@+id/lastname" />
+        android:layout_toLeftOf="@+id/cancelButton"
+        android:layout_toStartOf="@+id/cancelButton"
+        android:layout_marginRight="10dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancel"
-        android:id="@+id/CancelButton"
+        android:id="@+id/cancelButton"
         android:textColor="#ffffff"
         android:background="#FF0081"
         android:layout_alignTop="@+id/registerButton"
-        android:layout_toRightOf="@+id/registerButton"
-        android:layout_toEndOf="@+id/registerButton"
-        android:layout_marginLeft="25dp" />
+        android:layout_alignRight="@+id/lastname"
+        android:layout_alignEnd="@+id/lastname" />
 
 
 </RelativeLayout>

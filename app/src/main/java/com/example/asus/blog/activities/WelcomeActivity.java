@@ -31,7 +31,7 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
+        initComponents();
     }
 
     public void initComponents() {
@@ -44,11 +44,11 @@ public class WelcomeActivity extends AppCompatActivity {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkUser()) {
+                if (checkUser()) {
                     Intent intent = new Intent(WelcomeActivity.this, Main.class);
                     //intent.putExtra("user", getUser());
                     startActivity(intent);
-                } else{
+                } else {
                     username.setText("");
                     password.setText("");
                     Toast.makeText(WelcomeActivity.this, "Username or Password is incorrect",

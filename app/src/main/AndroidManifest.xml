@@ -8,7 +8,7 @@
         android:label="POLY"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.Main">
+        <activity android:name=".activities.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,12 +19,9 @@
         <activity android:name=".activities.pages.Following" />
         <activity android:name=".activities.pages.Reminder" />
         <activity android:name=".activities.pages.History" />
-        <activity
-            android:name=".activities.pages.WriteAnArticle"
-            android:label=""
-            android:theme="@style/AppTheme" />
+        <activity android:name=".activities.pages.WriteAnArticle" />
         <activity android:name=".activities.ArticleActivity" />
-        <activity android:name=".activities.WelcomeActivity" />
+        <activity android:name=".activities.Main" />
         <activity android:name=".activities.AddUserActivity"></activity>
     </application>
 

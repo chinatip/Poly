@@ -58,7 +58,8 @@
         android:layout_alignLeft="@+id/password"
         android:layout_alignStart="@+id/password"
         android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp" />
+        android:layout_marginStart="30dp"
+        android:singleLine="false" />
 
     <Button
         android:layout_width="wrap_content"
@@ -77,7 +78,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/addButton"
+        android:id="@+id/addUserButton"
         android:src="@drawable/add"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"

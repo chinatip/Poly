@@ -1,12 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.asus.blog.activities.AddUserActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:elevation="6dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:id="@+id/form2"
+        android:layout_marginTop="22dp"
+        android:layout_row="0"
+        android:layout_column="1"
+        android:textSize="22dp"
+        android:layout_below="@+id/form1"
+        android:layout_alignLeft="@+id/form1"
+        android:layout_alignStart="@+id/form1"
+        android:paddingBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:id="@+id/form1"
+        android:textSize="22dp"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:layout_marginLeft="20dp"
+        android:paddingBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lastname"
+        android:id="@+id/form4"
+        android:textSize="22dp"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/form3"
+        android:layout_alignRight="@+id/form1"
+        android:layout_alignEnd="@+id/form1"
+        android:layout_row="1"
+        android:layout_column="3"
+        android:layout_marginLeft="20dp"
+        android:paddingBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Firstname"
+        android:id="@+id/form3"
+        android:textSize="22dp"
+        android:layout_marginTop="22dp"
+        android:layout_row="4"
+        android:layout_column="0"
+        android:layout_below="@+id/form2"
+        android:layout_alignLeft="@+id/form4"
+        android:layout_alignStart="@+id/form4"
+        android:paddingBottom="8dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/username"
+        android:text="username"
+        android:layout_marginLeft="42dp"
+        android:layout_marginStart="42dp"
+        android:layout_above="@+id/form2"
+        android:layout_toRightOf="@+id/form1"
+        android:ems="10" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/firstname"
+        android:text="firstname"
+        android:layout_above="@+id/form4"
+        android:layout_alignLeft="@+id/username"
+        android:layout_alignStart="@+id/username"
+        android:ems="10"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lastname"
+        android:text="lastname"
+        android:ems="10"
+        android:layout_alignLeft="@+id/firstname"
+        android:layout_alignStart="@+id/firstname"
+        android:layout_alignBottom="@+id/form4" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/password"
+        android:text="password"
+        android:layout_above="@+id/form3"
+        android:layout_alignLeft="@+id/firstname"
+        android:layout_alignStart="@+id/firstname" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:id="@+id/registerButton"
+        android:layout_marginTop="68dp"
+        android:textColor="#ffffff"
+        android:background="#FF0081"
+        android:layout_below="@+id/lastname"
+        android:layout_alignLeft="@+id/lastname"
+        android:layout_alignStart="@+id/lastname" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/CancelButton"
+        android:textColor="#ffffff"
+        android:background="#FF0081"
+        android:layout_alignTop="@+id/registerButton"
+        android:layout_toRightOf="@+id/registerButton"
+        android:layout_toEndOf="@+id/registerButton"
+        android:layout_marginLeft="25dp" />
+
 
 </RelativeLayout>

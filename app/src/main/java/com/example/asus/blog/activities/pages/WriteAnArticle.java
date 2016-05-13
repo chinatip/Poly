@@ -63,6 +63,5 @@ public class WriteAnArticle extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Timeline.update();
     }
 }

@@ -12,7 +12,7 @@ public class User {
     private List<Article> myArticles;
     private List<User> following;
 
-    public User(int id,String fname, String lname, String uname, String pass) {
+    public User(int id, String uname, String pass,String fname, String lname) {
         ID = id;
         firstname = fname;
         lastname = lname;

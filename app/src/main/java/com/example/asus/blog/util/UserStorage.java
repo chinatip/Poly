@@ -17,8 +17,9 @@ import java.util.ArrayList;
  * Created by Chinatip Vichian
  */
 public class UserStorage {
+    private static int currentID = 0;
     private static UserStorage instance;
-    private String DB = "ARTICLE";
+    private String DB = "USER";
     private SharedPreferences.Editor editor;
 
     public static UserStorage getInstance() {
@@ -28,9 +29,9 @@ public class UserStorage {
         return instance;
     }
 
+    public static int getCurrentID() { return currentID; }
+
     private UserStorage() {}
-
-
 
     public void saveUser(Context context, User user) throws JSONException {
         editor = context.getSharedPreferences(DB, context.MODE_PRIVATE).edit();
@@ -44,10 +45,25 @@ public class UserStorage {
 //                w.setAllTranslations(word.getTranslations());
 //                isSave = true;
 //            }
+            currentID++;
         }
         if(!isSave)
             users.add(user);
         saveArticleJson(new Gson().toJson(users));
+    }
+
+
+    public boolean userLogIn(Context context, String username, String password) throws JSONException {
+        String usersJson = context.getSharedPreferences(DB, Context.MODE_PRIVATE).getString(DB, null);
+        if(usersJson == null || usersJson.trim().equals("")) {
+            return false;
+        }
+        Type type = new TypeToken< ArrayList < User >>() {}.getType();
+        ArrayList<User> users = new Gson().fromJson(usersJson, type);
+        for(User u:users){
+           return u.getUsername().equals(username) && u.getPassword().equals(password);
+        }
+        return false;
     }
 
 //    public void deleteArticle(Context context, Article article) throws JSONException {
@@ -76,6 +92,19 @@ public class UserStorage {
 //        editor =  context.getSharedPreferences(DB, Context.MODE_PRIVATE).edit();
 //        saveArticleJson(new Gson().toJson(new ArrayList<Article>()));
 //    }
+
+    public User getUser(Context context, String username) {
+        String usersJson = context.getSharedPreferences(DB, Context.MODE_PRIVATE).getString(DB, null);
+        if(usersJson == null || usersJson.trim().equals("")) {
+            return null;
+        }
+        Type type = new TypeToken< ArrayList < User >>() {}.getType();
+        ArrayList<User> users = new Gson().fromJson(usersJson, type);
+        for(User u:users){
+            if(u.getUsername().equals(username)) return u;
+        }
+        return null;
+    }
 
     private void saveArticleJson(String userJson) {
         editor.putString(DB, userJson);

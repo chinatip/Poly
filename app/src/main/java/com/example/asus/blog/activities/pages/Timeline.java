@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.asus.blog.R;
+import com.example.asus.blog.activities.ArticleActivity;
 import com.example.asus.blog.adapters.ArticleAdapter;
 import com.example.asus.blog.models.Article;
 import com.example.asus.blog.util.Storage;
@@ -56,7 +57,7 @@ public class Timeline extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), Article.class );
+                Intent intent = new Intent(getActivity(), ArticleActivity.class );
                 intent.putExtra("article", articles.get(i));
                 startActivity(intent);
             }

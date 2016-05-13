@@ -30,28 +30,7 @@ public class Storage {
 
     private Storage() {}
 
-//    public Article SearchWord(Context context, String s) throws JSONException {
-//        String wordsJson = context.getSharedPreferences(DB, Context.MODE_PRIVATE).getString(DB, null);
-//        if(wordsJson == null || wordsJson.trim().equals("")) {
-//            return null;
-//        }
-//        Type type = new TypeToken< ArrayList<Article>>() {}.getType();
-//        ArrayList<Article> words = new Gson().fromJson(wordsJson, type);
-//        for(Word w:words){
-//            if(w.getWord().equals(s)) {
-//                return w;
-//            }
-//        }
-//        return null;
-//    }
 
-//    public void editWord(Context context, Article removeWord, Word saveWord) throws JSONException {
-//        editor = context.getSharedPreferences(DB, context.MODE_PRIVATE).edit();
-//        ArrayList<Word> words = loadWords(context);
-//        words.remove(removeWord);
-//        words.add(saveWord);
-//        saveWordsJson(new Gson().toJson(words));
-//    }
 
     public void saveWord(Context context, Article article) throws JSONException {
         editor = context.getSharedPreferences(DB, context.MODE_PRIVATE).edit();

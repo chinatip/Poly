@@ -3,7 +3,6 @@ package com.example.asus.blog.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.asus.blog.activities.pages.Timeline;
 import com.example.asus.blog.models.Article;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -16,19 +15,19 @@ import java.util.ArrayList;
 /**
  * Created by Chinatip Vichian
  */
-public class Storage {
-    private static Storage instance;
+public class ArticleStorage {
+    private static ArticleStorage instance;
     private String DB = "ARTICLE";
     private SharedPreferences.Editor editor;
 
-    public static Storage getInstance() {
+    public static ArticleStorage getInstance() {
         if(instance == null) {
-            instance = new Storage();
+            instance = new ArticleStorage();
         }
         return instance;
     }
 
-    private Storage() {}
+    private ArticleStorage() {}
 
 
 

@@ -10,13 +10,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.asus.blog.R;
 import com.example.asus.blog.activities.ArticleActivity;
 import com.example.asus.blog.adapters.ArticleAdapter;
 import com.example.asus.blog.models.Article;
-import com.example.asus.blog.util.Storage;
+import com.example.asus.blog.util.ArticleStorage;
 
 import org.json.JSONException;
 
@@ -24,7 +23,7 @@ import java.util.ArrayList;
 
 public class Timeline extends Fragment {
     private ArrayList<Article> articles;
-    private static ArticleAdapter articleAdapter;
+    public static ArticleAdapter articleAdapter;
     public ListView lv;
     public Button writeButton;
 
@@ -72,7 +71,7 @@ public class Timeline extends Fragment {
     public void loadArticles(Context context) {
         try {
             articles.clear();
-            for(Article n: Storage.getInstance().loadArticles(context)) {
+            for(Article n: ArticleStorage.getInstance().loadArticles(context)) {
                 articles.add(n);
             }
         } catch (JSONException e) {

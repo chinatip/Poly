@@ -20,7 +20,6 @@ public class ArticleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_article);
         Intent intent = getIntent();
         article = (Article) intent.getSerializableExtra("article");
-        createToolbar();
         initComponents();
     }
 
@@ -39,6 +38,7 @@ public class ArticleActivity extends AppCompatActivity {
     }
 
     public void initComponents() {
+        createToolbar();
         header = (TextView) findViewById(R.id.header);
         text = (TextView) findViewById(R.id.text);
         header.setText(article.getHeader());

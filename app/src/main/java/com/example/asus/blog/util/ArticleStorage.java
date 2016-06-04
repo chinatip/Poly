@@ -35,15 +35,15 @@ public class ArticleStorage {
         editor = context.getSharedPreferences(DB, context.MODE_PRIVATE).edit();
         ArrayList<Article> articles = loadArticles(context);
         boolean isSave = false;
-        for (int i = 0; i< articles.size(); i++) {
-            Article a = articles.get(i);
+//        for (int i = 0; i< articles.size(); i++) {
+//            Article a = articles.get(i);
             //check same article
 //            if(w.getHeader().equalsIgnoreCase(article.getHeader())){
 //                w.setAllSynonyms(word.getSynonyms());
 //                w.setAllTranslations(word.getTranslations());
 //                isSave = true;
 //            }
-        }
+//        }
         if(!isSave)
             articles.add(article);
         saveArticleJson(new Gson().toJson(articles));

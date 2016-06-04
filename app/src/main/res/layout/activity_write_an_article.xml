@@ -17,61 +17,73 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <EditText
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/header"
-        android:hint="HEADER"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_marginTop="37dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/scrollView2"
+        android:layout_below="@id/toolbar"
+        android:layout_alignParentBottom="true">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/text"
-        android:hint="Write down your text here."
-        android:textSize="16dp"
-        android:layout_below="@+id/header"
-        android:layout_alignLeft="@+id/header"
-        android:layout_alignStart="@+id/header"
-        android:layout_marginTop="32dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SAVE"
-        android:id="@+id/saveButton"
-        android:layout_alignBottom="@+id/header"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="31dp"
-        android:layout_marginEnd="31dp" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/header"
+                android:hint="HEADER"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_marginTop="37dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_below="@+id/toolbar"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
-    <GridView
-        android:id="@+id/addImageGridView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:columnWidth="100dp"
-        android:drawSelectorOnTop="true"
-        android:gravity="center"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="5dp"
-        android:focusable="true"
-        android:clickable="true"
-        android:layout_marginBottom="5dp"
-        android:layout_below="@+id/text"
-        android:layout_marginTop="15dp"
-        android:layout_alignLeft="@+id/text"
-        android:layout_alignStart="@+id/text"
-        android:layout_alignRight="@+id/saveButton"
-        android:layout_alignEnd="@+id/saveButton" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text"
+                android:hint="Write down your text here."
+                android:textSize="16dp"
+                android:layout_below="@+id/header"
+                android:layout_alignLeft="@+id/header"
+                android:layout_alignStart="@+id/header"
+                android:layout_marginTop="32dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SAVE"
+                android:id="@+id/saveButton"
+                android:layout_alignBottom="@+id/header"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="31dp"
+                android:layout_marginEnd="31dp" />
+
+            <GridView
+                android:id="@+id/addImageGridView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnWidth="75dp"
+                android:drawSelectorOnTop="true"
+                android:gravity="center"
+                android:numColumns="auto_fit"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="2dp"
+                android:focusable="true"
+                android:clickable="true"
+                android:layout_below="@+id/text"
+                android:layout_marginTop="15dp"
+                android:layout_alignLeft="@+id/text"
+                android:layout_alignStart="@+id/text"
+                android:layout_alignRight="@+id/saveButton"
+                android:layout_alignEnd="@+id/saveButton" />
+        </RelativeLayout>
+    </ScrollView>
 
 
 </RelativeLayout>

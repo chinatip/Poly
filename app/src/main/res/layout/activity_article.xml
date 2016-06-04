@@ -52,6 +52,25 @@
                 android:layout_alignLeft="@+id/header"
                 android:layout_alignStart="@+id/header" />
 
+            <GridView
+                android:id="@+id/showImageGridView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnWidth="75dp"
+                android:drawSelectorOnTop="true"
+                android:gravity="center"
+                android:numColumns="auto_fit"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="2dp"
+                android:focusable="true"
+                android:clickable="true"
+                android:layout_below="@+id/text"
+                android:layout_marginTop="15dp"
+                android:layout_alignLeft="@+id/text"
+                android:layout_alignStart="@+id/text"
+                android:layout_alignRight="@+id/saveButton"
+                android:layout_alignEnd="@+id/saveButton" />
+
         </RelativeLayout>
     </ScrollView>
 

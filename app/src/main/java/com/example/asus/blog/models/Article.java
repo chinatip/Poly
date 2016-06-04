@@ -11,7 +11,7 @@ import java.util.List;
 public class Article implements Serializable {
     private String header,text;
     private int writerID;
-    private ArrayList<File> images;
+    private ArrayList images;
     public Article(int writerID, String header, String text,ArrayList<File> images) {
         this.writerID = writerID;
         this.header = header;
@@ -33,10 +33,10 @@ public class Article implements Serializable {
     public void setText(String text) {
         this.text = text;
     }
-    public void setImages(ArrayList<File> images){
+    public void setImages(ArrayList images){
         this.images = images;
     }
-    public ArrayList<File> getImages() {
+    public ArrayList getImages() {
         return images;
     }
 }

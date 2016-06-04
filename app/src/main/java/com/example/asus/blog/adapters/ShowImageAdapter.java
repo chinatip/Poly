@@ -3,32 +3,25 @@ package com.example.asus.blog.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.asus.blog.R;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
- * Created by Asus on 4/6/2559.
+ * Created by Asus on 5/6/2559.
  */
-public class AddImageAdapter extends ArrayAdapter {
+public class ShowImageAdapter extends ArrayAdapter {
     private Context context;
     private int layoutResourceId;
     private ArrayList data = new ArrayList();
 
-    public AddImageAdapter(Context context, int layoutResourceId, ArrayList data) {
+    public ShowImageAdapter(Context context, int layoutResourceId, ArrayList data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
@@ -50,18 +43,13 @@ public class AddImageAdapter extends ArrayAdapter {
             holder = (ViewHolder) row.getTag();
         }
 
-        if(position==0) {
-            holder.image.setImageResource(R.drawable.add_image);
-        }
-        else{
-            Bitmap item = (Bitmap) data.get(position);
-            holder.image.setImageBitmap(item);
-        }
+        Bitmap item = (Bitmap) data.get(position);
+        holder.image.setImageBitmap(item);
+
         return row;
     }
 
     static class ViewHolder {
         ImageView image;
     }
-
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -31,6 +32,7 @@ import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -119,7 +121,8 @@ public class WriteAnArticle extends AppCompatActivity {
 
     private void save(){
         //fix writer id
-        Article article = new Article(0000,header.getText().toString(),text.getText().toString(),new ArrayList<File>());
+        images.remove(0);
+        Article article = new Article(0000,header.getText().toString(),text.getText().toString(),images);
         try {
             ArticleStorage.getInstance().saveWord(this, article);
         } catch (JSONException e) {
@@ -190,10 +193,12 @@ public class WriteAnArticle extends AppCompatActivity {
     }
 
     private void onSelectFromGalleryResult(Intent data) {
-        Bitmap bm=null;
+        Bitmap bm = null;
         if (data != null) {
             try {
                 bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                bm.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -201,4 +206,6 @@ public class WriteAnArticle extends AppCompatActivity {
         images.add(bm);
         addImageAdapter.notifyDataSetChanged();
     }
+
+
 }

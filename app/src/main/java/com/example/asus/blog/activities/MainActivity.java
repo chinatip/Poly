@@ -1,5 +1,6 @@
 package com.example.asus.blog.activities;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -18,10 +19,13 @@ import com.example.asus.blog.adapters.PagerAdapter;
 
 
 public class MainActivity extends AppCompatActivity {
+    private static String username;
     private FragmentPagerAdapter adapterViewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        username = (String) intent.getExtras().get("username");
         createToolBar();
         createTabs();
 
@@ -42,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("History"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter
@@ -82,5 +87,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public static String getUsername(){
+        return username;
+    }
 }
 

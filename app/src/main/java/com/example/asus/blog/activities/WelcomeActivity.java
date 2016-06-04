@@ -72,6 +72,7 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     public boolean checkUser() {
+        if(username.getText().length()==0||(password.getText().length()==0)) return false;
         try {
             return UserStorage.getInstance().userLogIn(this,username.getText().toString(),password.getText().toString());
         } catch (JSONException e) {

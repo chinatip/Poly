@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.asus.blog.R;
 import com.example.asus.blog.activities.ArticleActivity;
+import com.example.asus.blog.activities.MainActivity;
 import com.example.asus.blog.adapters.ArticleAdapter;
 import com.example.asus.blog.models.Article;
 import com.example.asus.blog.util.ArticleStorage;
@@ -26,10 +28,12 @@ public class Timeline extends Fragment {
     public static ArticleAdapter articleAdapter;
     public ListView lv;
     public Button writeButton;
+    private String username;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_timeline, container,false);
+        username = MainActivity.getUsername();
         initComponents(v);
         return v;
     }
@@ -44,8 +48,15 @@ public class Timeline extends Fragment {
         writeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), WriteAnArticle.class);
-                startActivity(intent);
+                if(username.equals("")){
+                    Toast.makeText(getActivity(),"Please login to write an article",
+                            Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Intent intent = new Intent(getActivity(), WriteAnArticle.class);
+                    intent.putExtra("username", username);
+                    startActivity(intent);
+                }
             }
         });
         lv = (ListView)v.findViewById(R.id.listView);

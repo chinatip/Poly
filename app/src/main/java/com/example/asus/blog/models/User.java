@@ -10,7 +10,7 @@ public class User {
     private int ID;
     private String firstname, lastname, username, password;
     private List<Article> myArticles;
-    private List<User> following;
+    private List<String> following;
 
     public User(int id, String uname, String pass,String fname, String lname) {
         ID = id;
@@ -22,11 +22,11 @@ public class User {
         following = new ArrayList<>();
     }
 
-    public void follow(User user) {
+    public void follow(String user) {
         following.add(user);
     }
 
-    public List<User> getFollowing() {
+    public List<String> getFollowing() {
         return following;
     }
 

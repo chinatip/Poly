@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.asus.blog.R;
 import com.example.asus.blog.activities.pages.Timeline;
@@ -52,8 +53,13 @@ public class AddUserActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                save();
-                finish();
+                if(username.getText().length()==0||(password.getText().length()==0)){
+                    Toast.makeText(AddUserActivity.this,"Please type in username and password",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    save();
+                    finish();
+                }
             }
         });
 

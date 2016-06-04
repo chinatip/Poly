@@ -17,7 +17,7 @@ import com.example.asus.blog.R;
 import com.example.asus.blog.adapters.PagerAdapter;
 
 
-public class Main extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     private FragmentPagerAdapter adapterViewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

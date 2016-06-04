@@ -21,8 +21,13 @@
         <activity android:name=".activities.pages.History" />
         <activity android:name=".activities.pages.WriteAnArticle" />
         <activity android:name=".activities.ArticleActivity" />
-        <activity android:name=".activities.Main" />
+        <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.AddUserActivity"></activity>
+        <receiver android:name=".reminder.AlarmReceiver" />
+
+        <service android:name=".reminder.RingtonePlayingService"
+            android:enabled="true">
+        </service>
     </application>
 
 </manifest>

@@ -1,6 +1,5 @@
 package com.example.asus.blog.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,14 +10,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.asus.blog.R;
-import com.example.asus.blog.models.Article;
 import com.example.asus.blog.models.User;
-import com.example.asus.blog.util.ArticleStorage;
 import com.example.asus.blog.util.UserStorage;
 
 import org.json.JSONException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -45,7 +41,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkUser()) {
-                    Intent intent = new Intent(WelcomeActivity.this, Main.class);
+                    Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                     //intent.putExtra("user", getUser());
                     startActivity(intent);
                 } else {
@@ -60,7 +56,7 @@ public class WelcomeActivity extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomeActivity.this, Main.class);
+                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                 //get user
                 //intent.putExtra("article", articles.get(i));
                 startActivity(intent);

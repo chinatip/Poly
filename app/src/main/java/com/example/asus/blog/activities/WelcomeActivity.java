@@ -42,7 +42,7 @@ public class WelcomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (checkUser()) {
                     Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
-                    //intent.putExtra("user", getUser());
+                    intent.putExtra("username", username.getText());
                     startActivity(intent);
                 } else {
                     username.setText("");
@@ -57,8 +57,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
-                //get user
-                //intent.putExtra("article", articles.get(i));
+                intent.putExtra("username", "");
                 startActivity(intent);
             }
         });
@@ -67,8 +66,6 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomeActivity.this, AddUserActivity.class);
-                //get user
-                //intent.putExtra("article", articles.get(i));
                 startActivity(intent);
             }
         });

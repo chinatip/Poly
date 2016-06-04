@@ -6,7 +6,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.asus.blog.R;
 import com.example.asus.blog.activities.pages.Timeline;
@@ -66,22 +65,12 @@ public class AddUserActivity extends AppCompatActivity {
         });
     }
     private void save(){
-        if(username.getText().equals("")){
-            Toast.makeText(AddUserActivity.this, "Please type in username",
-                    Toast.LENGTH_LONG).show();
-        }
-        if(password.getText().equals("")){
-            Toast.makeText(AddUserActivity.this, "Please type in password",
-                    Toast.LENGTH_LONG).show();
-        }
-        if(!username.getText().equals("") || !password.getText().equals("")) {
-            User user = new User(UserStorage.getCurrentID(), username.getText().toString(), password.getText().toString(),
-                    firstname.getText().toString(), lastname.getText().toString());
-            try {
-                UserStorage.getInstance().saveUser(this, user);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+        User user = new User(UserStorage.getCurrentID(),username.getText().toString(),password.getText().toString(),
+        firstname.getText().toString(),lastname.getText().toString());
+        try {
+            UserStorage.getInstance().saveUser(this, user);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }

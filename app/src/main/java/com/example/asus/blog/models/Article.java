@@ -1,5 +1,7 @@
 package com.example.asus.blog.models;
 
+import com.example.asus.blog.util.ArticleStorage;
+
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ public class Article implements Serializable {
     private String username;
     private ArrayList images;
     private ArrayList<String> keywords;
+    private int currentID = ArticleStorage.getCurrentID();
     public Article(String username, String header, String text,ArrayList images, ArrayList<String> keywords) {
         this.username = username;
         this.header = header;
@@ -56,5 +59,8 @@ public class Article implements Serializable {
             }
         }
         return isIn;
+    }
+    public int getID(){
+        return currentID;
     }
 }

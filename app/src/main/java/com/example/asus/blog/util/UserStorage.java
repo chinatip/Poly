@@ -123,9 +123,6 @@ public class UserStorage {
                     u.setFollowing(user.getFollowing());
                 }
             }
-        users.add(user);
-        currentID++;
-
         saveUserJson(new Gson().toJson(users));
     }
 }

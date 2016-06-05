@@ -1,17 +1,14 @@
-package com.example.asus.blog.activities.pages;
+package com.example.asus.blog.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,11 +16,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.PopupMenu;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.asus.blog.R;
-import com.example.asus.blog.activities.AddUserActivity;
+import com.example.asus.blog.activities.pages.Following;
+import com.example.asus.blog.activities.pages.History;
+import com.example.asus.blog.activities.pages.Timeline;
 import com.example.asus.blog.adapters.AddImageAdapter;
 import com.example.asus.blog.models.Article;
 import com.example.asus.blog.models.User;
@@ -34,15 +31,12 @@ import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.List;
 
-public class WriteAnArticle extends AppCompatActivity {
+public class EditArticleActivity extends AppCompatActivity {
     private EditText header, text, keyword;
     private Button save;
     private ArrayList images;
@@ -50,14 +44,16 @@ public class WriteAnArticle extends AppCompatActivity {
     private AddImageAdapter addImageAdapter;
     private String userChoosenTask;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-    boolean result= Utility.checkPermission(WriteAnArticle.this);
+    boolean result= Utility.checkPermission(EditArticleActivity.this);
     private User user;
-
+    private Article article;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit_article);
         Intent intent = getIntent();
         user = (User) intent.getExtras().get("user");
+        article = (Article) intent.getExtras().get("article");
         initComponents();
     }
 
@@ -78,6 +74,10 @@ public class WriteAnArticle extends AppCompatActivity {
         });
         images = new ArrayList();
         images.add(null);
+        ArrayList temp = article.getImages();
+        for(int i =0;i<temp.size();i++){
+            images.add(temp.get(i));
+        }
 
         gv = (GridView) findViewById(R.id.addImageGridView);
         addImageAdapter = new AddImageAdapter(this, R.layout.grid_item_layout, images);
@@ -86,7 +86,7 @@ public class WriteAnArticle extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    PopupMenu popup = new PopupMenu(WriteAnArticle.this, gv);
+                    PopupMenu popup = new PopupMenu(EditArticleActivity.this, gv);
                     popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
                     popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
@@ -126,8 +126,13 @@ public class WriteAnArticle extends AppCompatActivity {
 
     public void createFormForArticle(){
         header = (EditText) findViewById(R.id.header);
+        header.setText(article.getHeader());
         text = (EditText) findViewById(R.id.text);
+        text.setText(article.getText());
         keyword = (EditText) findViewById(R.id.keywords);
+        String key = article.getKeywords().toString();
+        String cut = key.substring(1, keyword.length() - 1);
+        keyword.setText(cut);
     }
 
     private void save(){
@@ -139,7 +144,7 @@ public class WriteAnArticle extends AppCompatActivity {
         images.remove(0);
         Article article = new Article(user.getUsername(), header.getText().toString(), text.getText().toString(), images, keywordList);
         try {
-            ArticleStorage.getInstance().saveWord(this, article);
+            ArticleStorage.getInstance().UpdateArticle(getApplicationContext(),article,user);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -188,20 +193,20 @@ public class WriteAnArticle extends AppCompatActivity {
 
         File folder = new File("/MyStickers");
         File destination = new File (Environment.getExternalStorageDirectory().getAbsolutePath()+folder,
-        System.currentTimeMillis() + ".jpg");
+                System.currentTimeMillis() + ".jpg");
         if(!folder.exists()) folder.mkdirs();
 
         FileOutputStream fo;
 
         try {
-        destination.createNewFile();
-        fo = new FileOutputStream(destination);
-        fo.write(bytes.toByteArray());
-        fo.close();
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
         } catch (FileNotFoundException e) {
-        e.printStackTrace();
+            e.printStackTrace();
         } catch (IOException e) {
-        e.printStackTrace();
+            e.printStackTrace();
         }
         images.add(thumbnail);
         addImageAdapter.notifyDataSetChanged();
@@ -221,6 +226,4 @@ public class WriteAnArticle extends AppCompatActivity {
         images.add(bm);
         addImageAdapter.notifyDataSetChanged();
     }
-
-
 }

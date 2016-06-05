@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.asus.blog.R;
 import com.example.asus.blog.activities.pages.Timeline;
+import com.example.asus.blog.activities.pages.WriteAnArticle;
 import com.example.asus.blog.adapters.ShowImageAdapter;
 import com.example.asus.blog.models.Article;
 import com.example.asus.blog.models.User;
@@ -23,7 +24,7 @@ public class ArticleActivity extends AppCompatActivity {
     private Article article;
     private GridView gv;
     private ShowImageAdapter showImageAdapter;
-    private ImageView userPic;
+    private ImageView userPic,editButton;
     private User userOwner,userViewer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +75,7 @@ public class ArticleActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ArticleActivity.this, UserActivity.class);
                 intent.putExtra("userOwner", userOwner);
-                intent.putExtra("userViewer",userViewer);
+                intent.putExtra("userViewer", userViewer);
                 startActivity(intent);
             }
         });
@@ -83,7 +84,18 @@ public class ArticleActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ArticleActivity.this, UserActivity.class);
                 intent.putExtra("userOwner", userOwner);
-                intent.putExtra("userViewer",userViewer);
+                intent.putExtra("userViewer", userViewer);
+                startActivity(intent);
+            }
+        });
+        editButton = (ImageView) findViewById(R.id.editButton);
+        setCanEdit();
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ArticleActivity.this, EditArticleActivity.class);
+                intent.putExtra("user", userOwner);
+                intent.putExtra("article", article);
                 startActivity(intent);
             }
         });
@@ -91,5 +103,16 @@ public class ArticleActivity extends AppCompatActivity {
 
     public User getUser(String username) {
         return UserStorage.getInstance().getUser(this,article.getUsername());
+    }
+
+    public void setCanEdit(){
+        if(userViewer!=null) {
+            if (userOwner.getUsername().equals(userViewer.getUsername()))
+                editButton.setVisibility(View.VISIBLE);
+            else
+                editButton.setVisibility(View.INVISIBLE);
+        }
+        else
+            editButton.setVisibility(View.INVISIBLE);
     }
 }

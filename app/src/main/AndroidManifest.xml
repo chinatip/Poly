@@ -33,9 +33,10 @@
 
         <service
             android:name=".reminder.RingtonePlayingService"
-            android:enabled="true"></service>
+            android:enabled="true" />
 
-        <activity android:name=".activities.UserActivity"></activity>
+        <activity android:name=".activities.UserActivity" />
+        <activity android:name=".activities.EditArticleActivity"></activity>
     </application>
 
 </manifest>

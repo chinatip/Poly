@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.example.asus.blog.models.Article;
+import com.example.asus.blog.models.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -19,6 +20,9 @@ public class ArticleStorage {
     private static ArticleStorage instance;
     private String DB = "ARTICLE";
     private SharedPreferences.Editor editor;
+    private static int currentID = 0;
+
+    public static int getCurrentID() { return currentID; }
 
     public static ArticleStorage getInstance() {
         if(instance == null) {
@@ -46,6 +50,7 @@ public class ArticleStorage {
 //        }
         if(!isSave)
             articles.add(article);
+        currentID++;
         saveArticleJson(new Gson().toJson(articles));
     }
 
@@ -79,5 +84,20 @@ public class ArticleStorage {
     private void saveArticleJson(String articleJson) {
         editor.putString(DB, articleJson);
         editor.commit();
+    }
+
+    public void UpdateArticle(Context context, Article article, User user) throws JSONException{
+        editor = context.getSharedPreferences(DB, context.MODE_PRIVATE).edit();
+        ArrayList<Article> articles = loadArticles(context);
+        if(articles.size()>0)
+            for (int i = 0; i< articles.size(); i++) {
+                Article a = articles.get(i);
+                if(a.getUsername().equals(user.getUsername())
+                        &&a.getID() == article.getID()){
+                    articles.remove(a);
+                    articles.add(article);
+                }
+            }
+        saveArticleJson(new Gson().toJson(articles));
     }
 }

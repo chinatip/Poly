@@ -27,9 +27,10 @@ import java.util.Collections;
 public class Following extends Fragment {
     private static ArrayList<Article> articles;
     public static ArticleAdapter articleAdapter;
-    public ListView lv;
-    private static User user;
     private static Activity activity;
+    private static User user;
+    public ListView lv;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_following, container,false);
@@ -39,24 +40,30 @@ public class Following extends Fragment {
         return v;
     }
 
-    public void initComponents(View v){
-        Context context = getActivity().getApplicationContext();
-        if(user!=null) loadArticles(context);
+    public void initComponents(View v) {
+        if (user != null) {
+            createListView(v);
+        }
+    }
 
-        lv = (ListView)v.findViewById(R.id.listView);
-        articleAdapter = new ArticleAdapter(context, R.layout.article_list, articles);
-        lv.setAdapter(articleAdapter);
+    public void createListView(View v){
+            Context context = getActivity().getApplicationContext();
+            loadArticles(context);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            lv = (ListView)v.findViewById(R.id.listView);
+            articleAdapter = new ArticleAdapter(context, R.layout.article_list, articles);
+            lv.setAdapter(articleAdapter);
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), ArticleActivity.class);
-                intent.putExtra("article", articles.get(i));
-                intent.putExtra("user", user);
-                startActivity(intent);
-            }
-        });
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                    Intent intent = new Intent(getActivity(), ArticleActivity.class);
+                    intent.putExtra("article", articles.get(i));
+                    intent.putExtra("user", user);
+                    startActivity(intent);
+                }
+            });
     }
 
     public static void loadArticles(Context context) {

@@ -47,4 +47,14 @@ public class Article implements Serializable {
     public ArrayList<String> getKeywords() {
         return keywords;
     }
+    public boolean search(String s) {
+        boolean isIn = false;
+        for(int i =0;i<keywords.size();i++) {
+            String ky = keywords.get(i);
+            if (s.equalsIgnoreCase(ky.subSequence(0, s.length()).toString()) || s.equals("")) {
+                isIn = true;
+            }
+        }
+        return isIn;
+    }
 }

@@ -29,9 +29,10 @@ public class History extends Fragment {
 
     private static ArrayList<Article> articles;
     public static ArticleAdapter articleAdapter;
-    public ListView lv;
-    private static User user;
     private static Activity activity;
+    private static User user;
+    public ListView lv;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_history, container,false);
@@ -61,6 +62,12 @@ public class History extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+
+    public void createListView(View v){
+        if (user != null) {
+            createListView(v);
+        }
     }
 
     public static void loadArticles(Context context) {

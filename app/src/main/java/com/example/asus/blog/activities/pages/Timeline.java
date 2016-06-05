@@ -5,11 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,6 +37,7 @@ public class Timeline extends Fragment {
     public Button writeButton;
     private User user;
     private static Activity activity;
+    private EditText searchText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,11 +77,34 @@ public class Timeline extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), ArticleActivity.class );
+                Intent intent = new Intent(getActivity(), ArticleActivity.class);
                 intent.putExtra("article", articles.get(i));
-                intent.putExtra("user",user);
+                intent.putExtra("user", user);
                 startActivity(intent);
             }
+        });
+        searchText = (EditText) v.findViewById(R.id.searchText);
+        searchText.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable arg0) {
+                ArrayList<Article> src_list = new ArrayList<>();
+                for (int i = 0; i < articles.size(); i++) {
+                    try {
+                        if(articles.get(i).search(searchText.getText().toString())){
+                            src_list.add(articles.get(i));
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+                lv.setAdapter(new ArticleAdapter(activity.getApplicationContext(), R.layout.article_list, src_list));
+            }
+
+            public void beforeTextChanged(CharSequence s, int start
+                    , int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start
+                    , int before, int count) { }
+
         });
 
     }

@@ -34,6 +34,9 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         }
         TextView word = (TextView) v.findViewById(R.id.header);
         word.setText(listdata.get(position).getHeader());
+        TextView keywords = (TextView) v.findViewById(R.id.description);
+        String keyword = listdata.get(position).getKeywords().toString();
+        keywords.setText(keyword.substring(1,keyword.length()-1));
         if(1+1==9)
             word.setTextColor(Color.RED);
         else

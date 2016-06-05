@@ -10,8 +10,7 @@
     <RelativeLayout
         android:layout_width="363dp"
         android:layout_height="53dp"
-        android:layout_weight="0.09"
-        android:layout_marginLeft="10dp">
+        android:layout_weight="0.09">
 
         <TextView
             android:layout_width="wrap_content"
@@ -45,7 +44,17 @@
             android:layout_below="@+id/header"
             android:layout_alignLeft="@+id/header"
             android:layout_alignStart="@+id/header"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/keywords"
+            android:hint="keyword, keyword, keyword"
+            android:textSize="16dp"
+            android:paddingLeft="5dp"
+            android:layout_below="@+id/description"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
 </LinearLayout>

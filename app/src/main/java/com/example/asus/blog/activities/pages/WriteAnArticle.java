@@ -47,10 +47,13 @@ public class WriteAnArticle extends AppCompatActivity {
     private String userChoosenTask;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     boolean result= Utility.checkPermission(WriteAnArticle.this);
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        username = (String) intent.getExtras().get("username");
         initComponents();
     }
 
@@ -122,7 +125,7 @@ public class WriteAnArticle extends AppCompatActivity {
     private void save(){
         //fix writer id
         images.remove(0);
-        Article article = new Article(0000,header.getText().toString(),text.getText().toString(),images);
+        Article article = new Article(username, header.getText().toString(), text.getText().toString(), images);
         try {
             ArticleStorage.getInstance().saveWord(this, article);
         } catch (JSONException e) {

@@ -1,13 +1,14 @@
 package com.example.asus.blog.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Chinatip Vichian
  */
-public class User {
-    private int ID;
+public class User implements Serializable{
+    private static int ID = 0;
     private String firstname, lastname, username, password;
     private List<Article> myArticles;
     private List<String> following;

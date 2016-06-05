@@ -33,23 +33,21 @@ public class UserStorage {
 
     private UserStorage() {}
 
-    public void saveUser(Context context, User user) throws JSONException {
+    public boolean saveUser(Context context, User user) throws JSONException {
         editor = context.getSharedPreferences(DB, context.MODE_PRIVATE).edit();
         ArrayList<User> users = loadUsers(context);
-        boolean isSave = false;
-        for (int i = 0; i< users.size(); i++) {
-            User u = users.get(i);
-            //check same article
-//            if(w.getHeader().equalsIgnoreCase(article.getHeader())){
-//                w.setAllSynonyms(word.getSynonyms());
-//                w.setAllTranslations(word.getTranslations());
-//                isSave = true;
-//            }
-            currentID++;
-        }
-        if(!isSave)
-            users.add(user);
-        saveArticleJson(new Gson().toJson(users));
+        if(users.size()>0)
+            for (int i = 0; i< users.size(); i++) {
+                User u = users.get(i);
+                if(u.getUsername().equals(user.getUsername())){
+                    return false;
+                }
+            }
+        users.add(user);
+        currentID++;
+
+        saveUserJson(new Gson().toJson(users));
+        return true;
     }
 
 
@@ -60,8 +58,12 @@ public class UserStorage {
         }
         Type type = new TypeToken< ArrayList < User >>() {}.getType();
         ArrayList<User> users = new Gson().fromJson(usersJson, type);
-        for(User u:users){
-           return u.getUsername().equals(username) && u.getPassword().equals(password);
+        if(users.size()>0) {
+            for (int i = 0; i < users.size(); i++) {
+                User u = users.get(i);
+                if (u.getUsername().equals(username) && u.getPassword().equals(password))
+                    return true;
+            }
         }
         return false;
     }
@@ -82,9 +84,9 @@ public class UserStorage {
     public  ArrayList<User> loadUsers(Context context) throws JSONException {
         String userJson = context.getSharedPreferences(DB, Context.MODE_PRIVATE).getString(DB, null);
         if(userJson == null || userJson.trim().equals("")) {
-            return new ArrayList<User>();
+            return new ArrayList<>();
         }
-        Type type = new TypeToken< ArrayList < Article >>() {}.getType();
+        Type type = new TypeToken< ArrayList < User >>() {}.getType();
         return new Gson().fromJson(userJson, type);
     }
 
@@ -106,7 +108,7 @@ public class UserStorage {
         return null;
     }
 
-    private void saveArticleJson(String userJson) {
+    private void saveUserJson(String userJson) {
         editor.putString(DB, userJson);
         editor.commit();
     }

@@ -16,16 +16,17 @@ import android.widget.TextView;
 
 import com.example.asus.blog.R;
 import com.example.asus.blog.adapters.PagerAdapter;
+import com.example.asus.blog.models.User;
 
 
 public class MainActivity extends AppCompatActivity {
-    private static String username;
+    private static User user;
     private FragmentPagerAdapter adapterViewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        username = (String) intent.getExtras().get("username");
+        user = (User) intent.getExtras().get("user");
         createToolBar();
         createTabs();
 
@@ -87,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static String getUsername(){
-        return username;
+    public static User getUser(){
+        return user;
     }
 }
 

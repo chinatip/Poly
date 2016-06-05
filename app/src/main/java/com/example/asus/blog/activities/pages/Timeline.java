@@ -17,6 +17,7 @@ import com.example.asus.blog.activities.ArticleActivity;
 import com.example.asus.blog.activities.MainActivity;
 import com.example.asus.blog.adapters.ArticleAdapter;
 import com.example.asus.blog.models.Article;
+import com.example.asus.blog.models.User;
 import com.example.asus.blog.util.ArticleStorage;
 
 import org.json.JSONException;
@@ -28,12 +29,12 @@ public class Timeline extends Fragment {
     public static ArticleAdapter articleAdapter;
     public ListView lv;
     public Button writeButton;
-    private String username;
+    private User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_timeline, container,false);
-        username = MainActivity.getUsername();
+        user = MainActivity.getUser();
         initComponents(v);
         return v;
     }
@@ -48,13 +49,13 @@ public class Timeline extends Fragment {
         writeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(username.equals("")){
+                if(user == null){
                     Toast.makeText(getActivity(),"Please login to write an article",
                             Toast.LENGTH_LONG).show();
                 }
                 else {
                     Intent intent = new Intent(getActivity(), WriteAnArticle.class);
-                    intent.putExtra("username", username);
+                    intent.putExtra("user", user);
                     startActivity(intent);
                 }
             }

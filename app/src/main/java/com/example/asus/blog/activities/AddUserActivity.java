@@ -3,6 +3,7 @@ package com.example.asus.blog.activities;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,12 +54,15 @@ public class AddUserActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(username.getText().length()==0||(password.getText().length()==0)){
+                if(username.getText().toString().matches("")||(password.getText().toString().matches(""))){
                     Toast.makeText(AddUserActivity.this,"Please type in username and password",Toast.LENGTH_LONG).show();
                 }
                 else {
-                    save();
-                    finish();
+                    boolean isSave = save();
+                    if(!isSave){
+                        Toast.makeText(AddUserActivity.this,"This username is already been used.",Toast.LENGTH_LONG).show();
+                    }
+                    else finish();
                 }
             }
         });
@@ -70,13 +74,15 @@ public class AddUserActivity extends AppCompatActivity {
             }
         });
     }
-    private void save(){
+    private boolean save(){
         User user = new User(UserStorage.getCurrentID(),username.getText().toString(),password.getText().toString(),
         firstname.getText().toString(),lastname.getText().toString());
+        boolean isSave = false;
         try {
-            UserStorage.getInstance().saveUser(this, user);
+            isSave = UserStorage.getInstance().saveUser(this, user);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return isSave;
     }
 }

@@ -24,6 +24,8 @@ import com.example.asus.blog.util.ArticleStorage;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Timeline extends Fragment {
     private static ArrayList<Article> articles;
@@ -89,6 +91,7 @@ public class Timeline extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Collections.reverse(articles);
     }
 
     public static void update() {

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.asus.blog.R;
@@ -24,7 +25,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 public class UserActivity extends AppCompatActivity {
-    private User user;
+    private User userOwner,userViewer;
     private TextView username;
     private ToggleButton followToggle;
     private ArrayList<Article> articles;
@@ -36,7 +37,8 @@ public class UserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         Intent intent = getIntent();
-        user = (User) intent.getSerializableExtra("user");
+        userOwner = (User) intent.getSerializableExtra("userOwner");
+        userViewer = (User) intent.getSerializableExtra("userViewer");
         articles = new ArrayList<>();
         loadArticles(this);
         initComponents();
@@ -44,7 +46,7 @@ public class UserActivity extends AppCompatActivity {
 
     public void initComponents(){
         username = (TextView)findViewById(R.id.username);
-        username.setText(user.getUsername());
+        username.setText(userOwner.getUsername());
         back = (ImageView) findViewById(R.id.backButton);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,13 +59,15 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-
+                    userViewer.set(userViewer.getFollowing().add(userOwner.getUsername());
+                    Toast.makeText(UserActivity.this,"Following "+ userOwner.getUsername(),Toast.LENGTH_LONG).show();
                 }
                 else {
-
+                    Toast.makeText(UserActivity.this,"Unfollowed "+ userOwner.getUsername(),Toast.LENGTH_LONG).show();
                 }
             }
         });
+        if(userViewer==null||userViewer.getUsername().equals(userOwner.getUsername())) followToggle.setVisibility(View.INVISIBLE);
         lv = (ListView)findViewById(R.id.listView);
         articleAdapter = new ArticleAdapter(this, R.layout.article_list, articles);
         lv.setAdapter(articleAdapter);
@@ -74,7 +78,7 @@ public class UserActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
                 Intent intent = new Intent(UserActivity.this, ArticleActivity.class);
                 intent.putExtra("article", articles.get(i));
-                intent.putExtra("user", user);
+                intent.putExtra("user", userViewer);
                 startActivity(intent);
             }
         });
@@ -83,7 +87,7 @@ public class UserActivity extends AppCompatActivity {
         try {
             articles.clear();
             for(Article a: ArticleStorage.getInstance().loadArticles(context)) {
-                if(a.getUsername().equals(user.getUsername()))
+                if(a.getUsername().equals(userOwner.getUsername()))
                     articles.add(a);
             }
         } catch (JSONException e) {

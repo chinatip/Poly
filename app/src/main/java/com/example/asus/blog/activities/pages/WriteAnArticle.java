@@ -40,9 +40,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.List;
 
 public class WriteAnArticle extends AppCompatActivity {
-    private EditText header, text;
+    private EditText header, text, keyword;
     private Button save;
     private ArrayList images;
     private GridView gv;
@@ -77,6 +78,7 @@ public class WriteAnArticle extends AppCompatActivity {
         });
         images = new ArrayList();
         images.add(null);
+        keyword = (EditText) findViewById(R.id.keywords);
         gv = (GridView) findViewById(R.id.addImageGridView);
         addImageAdapter = new AddImageAdapter(this, R.layout.grid_item_layout, images);
         gv.setAdapter(addImageAdapter);
@@ -128,9 +130,13 @@ public class WriteAnArticle extends AppCompatActivity {
     }
 
     private void save(){
-        //fix writer id
+        String [] keywordArray = keyword.getText().toString().split(",");
+        ArrayList<String> keywordList = new ArrayList<>();
+        for (int i = 0; i< keywordArray.length; i++) {
+            keywordList.add(keywordArray[i].trim());
+        }
         images.remove(0);
-        Article article = new Article(user.getUsername(), header.getText().toString(), text.getText().toString(), images);
+        Article article = new Article(user.getUsername(), header.getText().toString(), text.getText().toString(), images, keywordList);
         try {
             ArticleStorage.getInstance().saveWord(this, article);
         } catch (JSONException e) {

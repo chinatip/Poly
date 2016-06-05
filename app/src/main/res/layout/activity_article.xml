@@ -33,10 +33,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/header"
-                android:textSize="28dp"
+                android:textSize="24dp"
                 android:text="Header"
                 android:textStyle="bold"
-                android:layout_marginTop="34dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="20dp" />
@@ -46,8 +45,7 @@
                 android:layout_height="wrap_content"
                 android:text="New Text"
                 android:id="@+id/text"
-                android:textSize="22dp"
-                android:layout_marginTop="31dp"
+                android:textSize="18dp"
                 android:layout_below="@+id/header"
                 android:layout_alignLeft="@+id/header"
                 android:layout_alignStart="@+id/header" />
@@ -64,12 +62,19 @@
                 android:verticalSpacing="2dp"
                 android:focusable="true"
                 android:clickable="true"
+                android:layout_below="@+id/keywords"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="keywords"
+                android:id="@+id/keywords"
+                android:textSize="18dp"
                 android:layout_below="@+id/text"
-                android:layout_marginTop="15dp"
                 android:layout_alignLeft="@+id/text"
-                android:layout_alignStart="@+id/text"
-                android:layout_alignRight="@+id/saveButton"
-                android:layout_alignEnd="@+id/saveButton" />
+                android:layout_alignStart="@+id/text" />
 
         </RelativeLayout>
     </ScrollView>
@@ -95,6 +100,8 @@
         android:layout_alignBottom="@+id/userPic"
         android:layout_toLeftOf="@+id/userPic"
         android:layout_alignTop="@+id/userPic"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp" />
 
 </RelativeLayout>

@@ -12,11 +12,13 @@ public class Article implements Serializable {
     private String header,text;
     private String username;
     private ArrayList images;
-    public Article(String username, String header, String text,ArrayList<File> images) {
+    private ArrayList<String> keywords;
+    public Article(String username, String header, String text,ArrayList images, ArrayList<String> keywords) {
         this.username = username;
         this.header = header;
         this.text = text;
         this.images = images;
+        this.keywords = keywords;
     }
     public String getUsername(){
         return username;
@@ -38,5 +40,11 @@ public class Article implements Serializable {
     }
     public ArrayList getImages() {
         return images;
+    }
+    public void setKeywords(ArrayList<String> keywords){
+        this.keywords = keywords;
+    }
+    public ArrayList<String> getKeywords() {
+        return keywords;
     }
 }

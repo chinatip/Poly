@@ -19,19 +19,20 @@ import com.example.asus.blog.models.User;
 import com.example.asus.blog.util.UserStorage;
 
 public class ArticleActivity extends AppCompatActivity {
-    private TextView header, text,username;
+    private TextView header, text, keyword, username;
     private Article article;
     private GridView gv;
     private ShowImageAdapter showImageAdapter;
     private ImageView userPic;
-    private User user;
+    private User userOwner,userViewer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
         Intent intent = getIntent();
         article = (Article) intent.getSerializableExtra("article");
-        user = getUser(article.getUsername());
+        userViewer = (User) intent.getSerializableExtra("user");
+        userOwner = getUser(article.getUsername());
         gv = (GridView) findViewById(R.id.showImageGridView);
         showImageAdapter = new ShowImageAdapter(this, R.layout.grid_item_layout, article.getImages());
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -63,6 +64,8 @@ public class ArticleActivity extends AppCompatActivity {
         text = (TextView) findViewById(R.id.text);
         header.setText(article.getHeader());
         text.setText(article.getText());
+        keyword = (TextView) findViewById(R.id.keywords);
+        keyword.setText(article.getKeywords().toString());
         username = (TextView) findViewById(R.id.username);
         username.setText(article.getUsername());
         userPic = (ImageView) findViewById(R.id.userPic);
@@ -70,7 +73,8 @@ public class ArticleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ArticleActivity.this, UserActivity.class);
-                intent.putExtra("user", user);
+                intent.putExtra("userOwner", userOwner);
+                intent.putExtra("userViewer",userViewer);
                 startActivity(intent);
             }
         });
@@ -78,7 +82,8 @@ public class ArticleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ArticleActivity.this, UserActivity.class);
-                intent.putExtra("user", user);
+                intent.putExtra("userOwner", userOwner);
+                intent.putExtra("userViewer",userViewer);
                 startActivity(intent);
             }
         });

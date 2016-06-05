@@ -18,8 +18,8 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/scrollView2"
         android:layout_below="@id/toolbar"
         android:layout_alignParentBottom="true">
@@ -50,8 +50,7 @@
                 android:textSize="16dp"
                 android:layout_below="@+id/header"
                 android:layout_alignLeft="@+id/header"
-                android:layout_alignStart="@+id/header"
-                android:layout_marginTop="32dp" />
+                android:layout_alignStart="@+id/header" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -63,6 +62,16 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="31dp"
                 android:layout_marginEnd="31dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/keywords"
+                android:hint="Ex. keyword, keyword, keyword"
+                android:textSize="16dp"
+                android:layout_below="@+id/text"
+                android:layout_alignLeft="@+id/text"
+                android:layout_alignStart="@+id/text" />
 
             <GridView
                 android:id="@+id/addImageGridView"
@@ -76,12 +85,11 @@
                 android:verticalSpacing="2dp"
                 android:focusable="true"
                 android:clickable="true"
-                android:layout_below="@+id/text"
-                android:layout_marginTop="15dp"
-                android:layout_alignLeft="@+id/text"
-                android:layout_alignStart="@+id/text"
-                android:layout_alignRight="@+id/saveButton"
-                android:layout_alignEnd="@+id/saveButton" />
+                android:layout_below="@+id/keywords"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp" />
+
         </RelativeLayout>
     </ScrollView>
 

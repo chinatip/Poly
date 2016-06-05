@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.asus.blog.R;
 import com.example.asus.blog.activities.ArticleActivity;
@@ -47,23 +48,25 @@ public class Following extends Fragment {
     }
 
     public void createListView(View v){
-            Context context = getActivity().getApplicationContext();
-            loadArticles(context);
+        TextView skip = (TextView) v.findViewById(R.id.skip);
+        skip.setVisibility(View.INVISIBLE);
+        Context context = getActivity().getApplicationContext();
+        loadArticles(context);
 
-            lv = (ListView)v.findViewById(R.id.listView);
-            articleAdapter = new ArticleAdapter(context, R.layout.article_list, articles);
-            lv.setAdapter(articleAdapter);
+        lv = (ListView)v.findViewById(R.id.listView);
+        articleAdapter = new ArticleAdapter(context, R.layout.article_list, articles);
+        lv.setAdapter(articleAdapter);
 
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
-                    Intent intent = new Intent(getActivity(), ArticleActivity.class);
-                    intent.putExtra("article", articles.get(i));
-                    intent.putExtra("user", user);
-                    startActivity(intent);
-                }
-            });
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(), ArticleActivity.class);
+                intent.putExtra("article", articles.get(i));
+                intent.putExtra("user", user);
+                startActivity(intent);
+            }
+        });
     }
 
     public static void loadArticles(Context context) {

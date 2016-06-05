@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.asus.blog.R;
 import com.example.asus.blog.activities.ArticleActivity;
@@ -42,7 +43,15 @@ public class History extends Fragment {
         return v;
     }
 
+    public void createListView(View v){
+        if (user != null) {
+            createListView(v);
+        }
+    }
+
     public void initComponents(View v){
+        TextView skip = (TextView) v.findViewById(R.id.skip);
+        skip.setVisibility(View.INVISIBLE);
         Context context = getActivity().getApplicationContext();
         articles = new ArrayList<>();
         if(user!=null)
@@ -62,12 +71,6 @@ public class History extends Fragment {
                 startActivity(intent);
             }
         });
-    }
-
-    public void createListView(View v){
-        if (user != null) {
-            createListView(v);
-        }
     }
 
     public static void loadArticles(Context context) {

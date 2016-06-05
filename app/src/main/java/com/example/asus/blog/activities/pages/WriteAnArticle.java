@@ -19,12 +19,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.blog.R;
 import com.example.asus.blog.activities.AddUserActivity;
 import com.example.asus.blog.adapters.AddImageAdapter;
 import com.example.asus.blog.models.Article;
+import com.example.asus.blog.models.User;
 import com.example.asus.blog.models.Utility;
 import com.example.asus.blog.util.ArticleStorage;
 
@@ -36,6 +38,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class WriteAnArticle extends AppCompatActivity {
@@ -47,13 +50,13 @@ public class WriteAnArticle extends AppCompatActivity {
     private String userChoosenTask;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     boolean result= Utility.checkPermission(WriteAnArticle.this);
-    private String username;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        username = (String) intent.getExtras().get("username");
+        user = (User) intent.getExtras().get("user");
         initComponents();
     }
 
@@ -66,6 +69,9 @@ public class WriteAnArticle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 save();
+                Timeline.update();
+                Following.update();
+                History.update();
                 finish();
             }
         });
@@ -111,7 +117,6 @@ public class WriteAnArticle extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Timeline.update();
                 finish();
             }
         });
@@ -125,7 +130,7 @@ public class WriteAnArticle extends AppCompatActivity {
     private void save(){
         //fix writer id
         images.remove(0);
-        Article article = new Article(username, header.getText().toString(), text.getText().toString(), images);
+        Article article = new Article(user.getUsername(), header.getText().toString(), text.getText().toString(), images);
         try {
             ArticleStorage.getInstance().saveWord(this, article);
         } catch (JSONException e) {

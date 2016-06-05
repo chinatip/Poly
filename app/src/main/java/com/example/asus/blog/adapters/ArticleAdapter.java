@@ -18,9 +18,10 @@ import java.util.ArrayList;
  * Created by Chinatip Vichian
  */
 public class ArticleAdapter extends ArrayAdapter<Article> {
-
+    private ArrayList<Article> listdata;
     public ArticleAdapter(Context context, int resource, ArrayList<Article> objects){
         super(context, resource, objects);
+        listdata = objects;
     }
 
     public View getView(int position, View convertView, ViewGroup parent){
@@ -32,12 +33,16 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
             v = vi.inflate(R.layout.article_list, null);
         }
         TextView word = (TextView) v.findViewById(R.id.header);
-        word.setText(getItem(position).getHeader());
+        word.setText(listdata.get(position).getHeader());
         if(1+1==9)
             word.setTextColor(Color.RED);
         else
             word.setTextColor(Color.GRAY);
         return v;
+    }
+
+    public void setListdata(ArrayList<Article> data) {
+        listdata = data;
     }
 
 }

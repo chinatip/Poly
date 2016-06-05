@@ -1,5 +1,6 @@
 package com.example.asus.blog.activities.pages;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,16 +26,18 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 public class Timeline extends Fragment {
-    private ArrayList<Article> articles;
+    private static ArrayList<Article> articles;
     public static ArticleAdapter articleAdapter;
     public ListView lv;
     public Button writeButton;
     private User user;
+    private static Activity activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_timeline, container,false);
+        View v = inflater.inflate(R.layout.activity_timeline, container, false);
         user = MainActivity.getUser();
+        activity = getActivity();
         initComponents(v);
         return v;
     }
@@ -70,17 +73,14 @@ public class Timeline extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
                 Intent intent = new Intent(getActivity(), ArticleActivity.class );
                 intent.putExtra("article", articles.get(i));
+                intent.putExtra("user",user);
                 startActivity(intent);
             }
-
-//            public void onListItemClick(ListView l, View v, int position, long id) {
-//                Toast.makeText(getActivity().getApplicationContext(), "Yea!!! click ho gae called", Toast.LENGTH_SHORT).show();
-//            }
         });
 
     }
 
-    public void loadArticles(Context context) {
+    public static void loadArticles(Context context) {
         try {
             articles.clear();
             for(Article n: ArticleStorage.getInstance().loadArticles(context)) {
@@ -90,7 +90,12 @@ public class Timeline extends Fragment {
             e.printStackTrace();
         }
     }
+
     public static void update() {
+        loadArticles(activity.getApplicationContext());
+        articleAdapter.setListdata(articles);
         articleAdapter.notifyDataSetChanged();
     }
+
+
 }

@@ -11,7 +11,7 @@ public class User implements Serializable{
     private static int ID = 0;
     private String firstname, lastname, username, password;
     private List<Article> myArticles;
-    private List<String> following;
+    private ArrayList<String> following = new ArrayList<>();
 
     public User(int id, String uname, String pass,String fname, String lname) {
         ID = id;
@@ -23,12 +23,25 @@ public class User implements Serializable{
         following = new ArrayList<>();
     }
 
-    public void follow(String user) {
-        following.add(user);
+    public void follow(String username) {
+        following.add(username);
     }
 
-    public List<String> getFollowing() {
+    public void unfollow(String username) {
+        if(following.contains(username))
+            following.remove(username);
+    }
+
+    public ArrayList<String> getFollowing() {
         return following;
+    }
+
+    public boolean isFollow(String username){
+        return following.contains(username);
+    }
+
+    public void setFollowing(ArrayList<String> f) {
+        this.following = f;
     }
 
     public void addArticle(Article ar) {
@@ -52,4 +65,5 @@ public class User implements Serializable{
     public void setLastname(String lname) { lastname = lname; }
 
     public void setPassword(String pass) { password = pass; }
+
 }

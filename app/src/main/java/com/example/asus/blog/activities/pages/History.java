@@ -44,7 +44,8 @@ public class History extends Fragment {
     public void initComponents(View v){
         Context context = getActivity().getApplicationContext();
         articles = new ArrayList<>();
-        if(user!=null) loadArticles(context);
+        if(user!=null)
+            loadArticles(context);
 
         lv = (ListView)v.findViewById(R.id.listView);
         articleAdapter = new ArticleAdapter(context, R.layout.article_list, articles);
@@ -64,7 +65,7 @@ public class History extends Fragment {
 
     public static void loadArticles(Context context) {
         try {
-            articles.clear();
+            articles = new ArrayList<>();
             for(Article a: ArticleStorage.getInstance().loadArticles(context)) {
                 if(a.getUsername().equals(user.getUsername()))
                     articles.add(a);

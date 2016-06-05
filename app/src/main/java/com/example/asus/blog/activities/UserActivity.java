@@ -15,10 +15,12 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.asus.blog.R;
+import com.example.asus.blog.activities.pages.Following;
 import com.example.asus.blog.adapters.ArticleAdapter;
 import com.example.asus.blog.models.Article;
 import com.example.asus.blog.models.User;
 import com.example.asus.blog.util.ArticleStorage;
+import com.example.asus.blog.util.UserStorage;
 
 import org.json.JSONException;
 
@@ -55,15 +57,16 @@ public class UserActivity extends AppCompatActivity {
             }
         });
         followToggle = (ToggleButton) findViewById(R.id.toggleButton);
+        if(userViewer.isFollow(userOwner.getUsername()))
+            followToggle.setChecked(true);
         followToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    userViewer.set(userViewer.getFollowing().add(userOwner.getUsername());
-                    Toast.makeText(UserActivity.this,"Following "+ userOwner.getUsername(),Toast.LENGTH_LONG).show();
+                    follow();
                 }
                 else {
-                    Toast.makeText(UserActivity.this,"Unfollowed "+ userOwner.getUsername(),Toast.LENGTH_LONG).show();
+                    unfollow();
                 }
             }
         });
@@ -93,5 +96,27 @@ public class UserActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void follow(){
+        userViewer.follow(userOwner.getUsername());
+        try {
+            UserStorage.getInstance().UpdateUser(UserActivity.this,userViewer);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Following.update();
+        Toast.makeText(UserActivity.this,"Following "+ userOwner.getUsername(),Toast.LENGTH_LONG).show();
+    }
+
+    private void unfollow(){
+        userViewer.unfollow(userOwner.getUsername());
+        try {
+            UserStorage.getInstance().UpdateUser(UserActivity.this,userViewer);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Following.update();
+        Toast.makeText(UserActivity.this,"Unfollowed "+ userOwner.getUsername(),Toast.LENGTH_LONG).show();
     }
 }

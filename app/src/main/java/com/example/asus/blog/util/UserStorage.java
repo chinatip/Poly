@@ -112,4 +112,20 @@ public class UserStorage {
         editor.putString(DB, userJson);
         editor.commit();
     }
+
+    public void UpdateUser(Context context, User user) throws JSONException{
+        editor = context.getSharedPreferences(DB, context.MODE_PRIVATE).edit();
+        ArrayList<User> users = loadUsers(context);
+        if(users.size()>0)
+            for (int i = 0; i< users.size(); i++) {
+                User u = users.get(i);
+                if(u.getUsername().equals(user.getUsername())){
+                    u.setFollowing(user.getFollowing());
+                }
+            }
+        users.add(user);
+        currentID++;
+
+        saveUserJson(new Gson().toJson(users));
+    }
 }

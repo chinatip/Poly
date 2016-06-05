@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.asus.blog.R;
@@ -15,12 +16,14 @@ import com.example.asus.blog.activities.pages.Timeline;
 import com.example.asus.blog.adapters.ShowImageAdapter;
 import com.example.asus.blog.models.Article;
 import com.example.asus.blog.models.User;
+import com.example.asus.blog.util.UserStorage;
 
 public class ArticleActivity extends AppCompatActivity {
     private TextView header, text,username;
     private Article article;
     private GridView gv;
     private ShowImageAdapter showImageAdapter;
+    private ImageView userPic;
     private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,7 @@ public class ArticleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_article);
         Intent intent = getIntent();
         article = (Article) intent.getSerializableExtra("article");
-        user = (User) intent.getSerializableExtra("user");
+        user = getUser(article.getUsername());
         gv = (GridView) findViewById(R.id.showImageGridView);
         showImageAdapter = new ShowImageAdapter(this, R.layout.grid_item_layout, article.getImages());
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -61,6 +64,27 @@ public class ArticleActivity extends AppCompatActivity {
         header.setText(article.getHeader());
         text.setText(article.getText());
         username = (TextView) findViewById(R.id.username);
-        username.setText(user.getUsername());
+        username.setText(article.getUsername());
+        userPic = (ImageView) findViewById(R.id.userPic);
+        userPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ArticleActivity.this, UserActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+            }
+        });
+        username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ArticleActivity.this, UserActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public User getUser(String username) {
+        return UserStorage.getInstance().getUser(this,article.getUsername());
     }
 }

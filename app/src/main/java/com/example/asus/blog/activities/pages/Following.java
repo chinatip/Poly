@@ -41,7 +41,7 @@ public class Following extends Fragment {
     public void initComponents(View v){
         Context context = getActivity().getApplicationContext();
         articles = new ArrayList<>();
-        loadArticles(context);
+        if(user!=null) loadArticles(context);
 
         lv = (ListView)v.findViewById(R.id.listView);
         articleAdapter = new ArticleAdapter(context, R.layout.article_list, articles);

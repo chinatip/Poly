@@ -27,12 +27,15 @@
         <activity android:name=".activities.pages.WriteAnArticle" />
         <activity android:name=".activities.ArticleActivity" />
         <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.AddUserActivity"></activity>
+        <activity android:name=".activities.AddUserActivity" />
+
         <receiver android:name=".reminder.AlarmReceiver" />
 
-        <service android:name=".reminder.RingtonePlayingService"
-            android:enabled="true">
-        </service>
+        <service
+            android:name=".reminder.RingtonePlayingService"
+            android:enabled="true"></service>
+
+        <activity android:name=".activities.UserActivity"></activity>
     </application>
 
 </manifest>

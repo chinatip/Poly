@@ -2,7 +2,6 @@
     <string name="app_name">Blog</string>
     <string name="title_activity_write_an_article">WriteAnArticle</string>
     <string name="action_settings">Settings</string>
-
     <string-array name="dawkins_sounds">
         <item>Pick a Random Dawkins quote</item>
         <item>"Religion is the root of quite a lot of evil …"</item>

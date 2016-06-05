@@ -78,7 +78,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/userPic"
-        android:src="@drawable/icon2"
+        android:src="@drawable/user1"
         android:layout_below="@+id/toolbar"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
